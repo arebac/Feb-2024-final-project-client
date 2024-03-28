@@ -1,9 +1,11 @@
 import "./App.css";
-import { Routes, Route, Navigate, Outlet } from "react-router-dom";
+// import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
+import Home from "./screens/Home";
+import "./home.css"
 
 function App() {
   const getToken = () => {
@@ -20,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      {/* <Navbar />
 
       <Routes>
         <Route exact path="/" element={<HomePage />} />
@@ -31,7 +33,8 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Route>
-      </Routes>
+      </Routes> */}
+      <Home />
     </div>
   );
 }

@@ -1,49 +1,11 @@
+@import url(./shared/globalStyles.css);
+
 body {
   margin: 0;
+  box-sizing: border-box;
+  background-color: black;
 }
 
-a {
-  list-style: none;
-  color: black;
-}
-
-button,
-select {
-  padding: 5px 10px;
-  min-width: 50px;
-  margin: 5px;
-  font-size: 18px;
-}
-
-label {
-  width: 200px;
-  display: block;
-}
-
-input,
-textarea {
-  width: 200px;
-  padding: 10px;
-  display: inline-block;
-  margin: 10px;
-}
-
-nav {
-  background: #515f7d;
-  color: white;
-  padding: 0px 20px;
-  box-shadow: 0px 1px 2px gray;
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 5px;
-}
-
-nav li {
-  list-style: none;
-  color: white;
-  font-size: 24px;
-  font-weight: 600;
-}
 
 .SignupPage,
 .LoginPage {
