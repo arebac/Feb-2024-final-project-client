@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Feed from "./Feed";
 import Trending from "./Trending";
 import Library from "./library/Library";
-import Player from "./Player";
+import Player from "./player/Player";
 import Favorites from "./Favorites";
 import Sidebar from "../components/sidebar/Sidebar";
 import Login from "../auth/Login";
