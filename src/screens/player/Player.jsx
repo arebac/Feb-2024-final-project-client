@@ -14,7 +14,7 @@ const Player = () => {
   useEffect(() => {
     apiClient.get(`playlists/${location.state?.id}/tracks`).then((res) => {
       setTracks(res.data.items);
-      setCurrentTrack(res.data.items[0].track);
+      setCurrentTrack(res.data?.items[0].track);
     });
   });
 
