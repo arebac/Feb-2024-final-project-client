@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import SongCard from "../../components/songCard/SongCard";
 import Queue from "../../components/queue/Queue";
 import SpotifyWebApi from "spotify-web-api-js";
+import AudioPlayer from "../../components/audioPlayer/AudioPlayer";
 
 const spotifyApi = new SpotifyWebApi();
 const Player = () => {
   const location = useLocation();
   const [tracks, setTracks] = useState([]);
   const [currentTrack, setCurrentTrack] = useState({});
-
+  const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     const playlistId = location.state?.id;
     if (playlistId) {
@@ -23,22 +24,36 @@ const Player = () => {
           }
         },
         (err) => {
-          console.error("Something went wrong when fetching the playlist tracks", err);
+          console.error(
+            "Something went wrong when fetching the playlist tracks",
+            err
+          );
         }
       );
     }
   }, [location.state?.id]);
 
+  useEffect(() => {
+    // Ensure tracks is not empty and currentIndex is within bounds
+    if (
+      tracks.length > 0 &&
+      currentIndex >= 0 &&
+      currentIndex < tracks.length
+    ) {
+      setCurrentTrack(tracks[currentIndex].track);
+    }
+  }, [currentIndex, tracks]); // Depend on both currentIndex and tracks
+
   return (
     <div className="screen-container flex">
       <div className="left-player-body">
-
+        <AudioPlayer currentTrack={currentTrack} isPlaying={true} />
       </div>
       <div className="right-player-body">
         {currentTrack && currentTrack.album && (
           <SongCard album={currentTrack.album} />
         )}
-        <Queue tracks={tracks.map(track => track.track)} /> 
+        <Queue tracks={tracks} setCurrentIndex={setCurrentIndex} />
       </div>
     </div>
   );
