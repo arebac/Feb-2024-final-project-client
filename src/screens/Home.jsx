@@ -9,7 +9,7 @@ import Favorites from "./Favorites";
 import Sidebar from "../components/sidebar/Sidebar";
 import Login from "../auth/Login";
 import { useState, useEffect } from "react";
-import { setClientToken } from "../spotify";
+// import { setClientToken } from "../spotify";
 import SpotifyWebApi from "spotify-web-api-js";
 
 const spotifyApi = new SpotifyWebApi();
@@ -26,35 +26,28 @@ const getTokenFromUrl = () => {
 };
 
 const Home = () => {
-
-  const [spotifyToken, setSpotifyToken] = useState("");
-  const [nowPlaying, setNowPlaying] = useState({ name: "", albumArt: "" });
   const [loggedIn, setLoggedIn] = useState(false);
+  const [nowPlaying, setNowPlaying] = useState({ name: "", albumArt: "" });
 
   useEffect(() => {
-    console.log("This is what we derived form the URL: " + getTokenFromUrl);
-    const spotifyToken = getTokenFromUrl().access_token;
-    window.location.hash = "";
+    // This logs the entire object obtained from the URL. Adjusted to log only the token.
+    const { access_token: spotifyToken } = getTokenFromUrl();
+    console.log("Token obtained from URL:", spotifyToken);
+    window.location.hash = ""; // Clear the URL fragment for security
 
     if (spotifyToken) {
-      setSpotifyToken(spotifyToken);
-      spotifyApi.setAccessToken(spotifyToken);
-      spotifyApi.getMe().then((user) => {
-        console.log(user.username);
-      });
       setLoggedIn(true);
-    }
-  });
+      spotifyApi.setAccessToken(spotifyToken); // Set the token for Spotify API client
 
-  const getnowPlaying = () => {
-    spotifyApi.getMyCurrentPlayingTrack().then((response) => {
-      console.log(response.name);
-      setNowPlaying({
-        name: response.item.name,
-        albumArt: response.item.album.images[0].url,
+      // Fetch and log the user's Spotify username as a test
+      spotifyApi.getMe().then((user) => {
+        console.log("Spotify username:", user.display_name);
       });
-    });
-  };
+    }
+  }, []);
+
+
+
   // const [token, setToken] = useState("");
 
   // useEffect(() => {
@@ -73,20 +66,39 @@ const Home = () => {
   //   }
   // }, []);
 
-  return !token ? (
-    <Login />
-  ) : (
-    <div className="main-body">
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<Library />} />
-        <Route path="/feed" element={<Feed />} />
-        <Route path="/trending" element={<Trending />} />
-        <Route path="/player" element={<Player />} />
-        <Route path="/favorites" element={<Favorites />} />
-      </Routes>
-    </div>
+  //   return !token ? (
+  //     <Login />
+  //   ) : (
+  //     <div className="main-body">
+  //       <Sidebar />
+  //       <Routes>
+  //         <Route path="/" element={<Library />} />
+  //         <Route path="/feed" element={<Feed />} />
+  //         <Route path="/trending" element={<Trending />} />
+  //         <Route path="/player" element={<Player />} />
+  //         <Route path="/favorites" element={<Favorites />} />
+  //       </Routes>
+  //     </div>
+  //   );
+  // };
+
+  return (
+    <>
+      {!loggedIn ? (
+      <Login/>
+      ) : (
+        <div className="main-body">
+          <Sidebar />
+          <Routes>
+            <Route path="/" element={<Library />} />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/trending" element={<Trending />} />
+            <Route path="/player" element={<Player />} />
+            <Route path="/favorites" element={<Favorites />} />
+          </Routes>
+        </div>
+      )}
+    </>
   );
 };
-
 export default Home;

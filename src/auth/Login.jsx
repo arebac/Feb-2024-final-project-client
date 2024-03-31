@@ -1,5 +1,4 @@
 import React from "react";
-import { loginEndpoint } from "../spotify";
 import "./login.css";
 
 const Login = () => {
@@ -10,7 +9,7 @@ const Login = () => {
       alt="logo-spotify"
       className="logo"
     />
-    <a href={loginEndpoint}>
+    <a href={"http://localhost:4000"}>
       <div className="login-btn">LOG IN</div>
     </a>
   </div>

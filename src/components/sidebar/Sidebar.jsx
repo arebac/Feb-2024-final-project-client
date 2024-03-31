@@ -1,4 +1,4 @@
-import React from "react";
+
 import "./sidebar.css";
 import SidebarButton from "./SidebarButton";
 import { MdFavorite } from "react-icons/md";
@@ -7,8 +7,11 @@ import { FaPlay } from "react-icons/fa";
 import { FaSignOutAlt } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
 import { MdSpaceDashboard } from "react-icons/md";
-import { useState, useEffect } from "react";
-import  apiClient  from "../../spotify";
+import React, { useState, useEffect } from "react";
+import { Navigate, Outlet } from 'react-router-dom';
+import SpotifyWebApi from "spotify-web-api-js";
+
+const spotifyApi = new SpotifyWebApi();
 
 const Sidebar = () => {
   const [image, setImage] = useState(
@@ -16,14 +19,23 @@ const Sidebar = () => {
   );
 
   useEffect(() => {
-    apiClient.get("me").then((response) => {
-      setImage(response.data.images[0].url);
-    });
+    const token = localStorage.getItem("authToken"); // Directly retrieve the token
+    if (token) {
+      spotifyApi.setAccessToken(token);
+      spotifyApi
+        .getMe()
+        .then((response) => {
+          if (response.images && response.images.length > 0) {
+            console.log(response.images[0].url); // Optional: logging the image URL
+            setImage(response.images[0].url);
+          }
+        })
+        .catch((err) => {
+          console.error("Failed to fetch user profile", err);
+          // Handle error, e.g., token expired, network error, etc.
+        });
+    }
   }, []);
-
-  const getToken = () => {
-    return localStorage.getItem("authToken");
-  };
 
   const LoggedIn = () => {
     return getToken() ? <Outlet /> : <Navigate to="/login" />;
