@@ -12,6 +12,7 @@ const Player = () => {
   const [tracks, setTracks] = useState([]);
   const [currentTrack, setCurrentTrack] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
     const playlistId = location.state?.id;
     if (playlistId) {
@@ -34,7 +35,6 @@ const Player = () => {
   }, [location.state?.id]);
 
   useEffect(() => {
-    // Ensure tracks is not empty and currentIndex is within bounds
     if (
       tracks.length > 0 &&
       currentIndex >= 0 &&
@@ -42,12 +42,17 @@ const Player = () => {
     ) {
       setCurrentTrack(tracks[currentIndex].track);
     }
-  }, [currentIndex, tracks]); // Depend on both currentIndex and tracks
+  }, [currentIndex, tracks]); 
 
   return (
     <div className="screen-container flex">
       <div className="left-player-body">
-        <AudioPlayer currentTrack={currentTrack} isPlaying={true} />
+        <AudioPlayer
+          currentTrack={currentTrack}
+          total={tracks}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+        />
       </div>
       <div className="right-player-body">
         {currentTrack && currentTrack.album && (

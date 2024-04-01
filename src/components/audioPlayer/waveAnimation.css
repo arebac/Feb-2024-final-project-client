@@ -1,16 +1,16 @@
 .box-container {
     justify-content: space-between;
     height: 54px;
-    --boxSize: 15px;
+    --boxSize: 12px;
     --gutter: 8px;
-    width: 80%
+    width: 55%
 }
 
 .box {
     transform: scale(.4);
     height: 100%;
     width: var(--boxSize);
-    background: #fff;
+    background: linear-gradient(75deg, rgba(244, 187, 146, 1) 0%, rgba(118, 149, 69, 1) 100%) no-repeat;
     border-radius: 18px;
 
 }
