@@ -5,6 +5,7 @@ import SongCard from "../../components/songCard/SongCard";
 import Queue from "../../components/queue/Queue";
 import SpotifyWebApi from "spotify-web-api-js";
 import AudioPlayer from "../../components/audioPlayer/AudioPlayer";
+import Widgets from "../../components/widgets/Widgets";
 
 const spotifyApi = new SpotifyWebApi();
 const Player = () => {
@@ -42,7 +43,13 @@ const Player = () => {
     ) {
       setCurrentTrack(tracks[currentIndex].track);
     }
-  }, [currentIndex, tracks]); 
+  }, [currentIndex, tracks]);
+
+  // const playTrack = (trackUri) => {
+  //   spotifyApi.play({ uris: [trackUri] });
+  // };
+
+  // console.log(playTrack)
 
   return (
     <div className="screen-container flex">
@@ -53,6 +60,7 @@ const Player = () => {
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />
+        <Widgets artistID={currentTrack?.album?.artists[0]?.id} />
       </div>
       <div className="right-player-body">
         {currentTrack && currentTrack.album && (

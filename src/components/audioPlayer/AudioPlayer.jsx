@@ -24,7 +24,6 @@ const AudioPlayer = ({
 
   const currentPercentage = duration ? (trackProgress / duration) * 100 : 0;
 
-
   const startTimer = () => {
     clearInterval(intervalRef.current);
 
@@ -69,7 +68,7 @@ const AudioPlayer = ({
       setIsPlaying(true);
       startTimer();
     } else {
-      isReady.current =false;
+      isReady.current = true;
     }
   }, [currentIndex]);
 
