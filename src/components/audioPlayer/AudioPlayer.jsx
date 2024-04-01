@@ -10,7 +10,7 @@ const AudioPlayer = ({
   setCurrentIndex,
   total,
 }) => {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
   var audioSrc = total[currentIndex]?.track.preview_url;
 
@@ -23,7 +23,7 @@ const AudioPlayer = ({
   const { duration } = audioRef.current;
 
   const currentPercentage = duration ? (trackProgress / duration) * 100 : 0;
-  console.log(currentPercentage);
+
 
   const startTimer = () => {
     clearInterval(intervalRef.current);
@@ -69,7 +69,7 @@ const AudioPlayer = ({
       setIsPlaying(true);
       startTimer();
     } else {
-      isReady.current = true;
+      isReady.current =false;
     }
   }, [currentIndex]);
 
