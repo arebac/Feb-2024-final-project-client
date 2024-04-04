@@ -5,7 +5,19 @@
     border-radius: 30px;
     background-color: #488f50;
     opacity: 1;
-    background-image: repeating-radial-gradient(circle at center left, transparent 0, #488f50 100px), repeating-linear-gradient(#00000055, #000000);
+    background-color: #3bc937;
+    opacity: 1;
+    background-image: radial-gradient(circle at center center, #4d8664, #3bc937), repeating-radial-gradient(circle at center center, #4d8664, #4d8664, 35px, transparent 70px, transparent 35px);
+    background-blend-mode: multiply;}
+
+.screen-body {
+    width: 94%;
+    height: 90%;
+    padding: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    justify-content: space-between;
 }
 
 .flex{

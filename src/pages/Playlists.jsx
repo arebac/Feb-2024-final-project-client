@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { PlaylistContext } from "../context/playlists.context";
 import { Link } from "react-router-dom";
+import "../shared/yourPlaylists.css"
 
 function Playlists() {
   const { playlists, createPlaylist, deletePlaylist } =
@@ -9,8 +10,9 @@ function Playlists() {
 
   return (
     <div className="screen-container">
-      <div>
-        <h1>Your Playlists:</h1>
+      <div  className=""><div>
+    <h3 className="playlist-pagetitle">Your Playlists:</h3>
+        </div>
 
         <div
           className="modal fade"
@@ -19,7 +21,7 @@ function Playlists() {
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <form onSubmit={(e) => createPlaylist(e, name, setName)}>
+          <form className="library-body" onSubmit={(e) => createPlaylist(e, name, setName)}>
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
@@ -63,11 +65,11 @@ function Playlists() {
           </form>
         </div>
         {playlists && playlists.length ? (
-          <div>
+          <div >
             {playlists.map((playlist) => (
               <div className="playlist-card">
                 <Link to={`/playlists/${playlist._id}`}>
-                  <h3>{playlist.name}</h3>
+                  <h3 className="playlist-title">{playlist.name}</h3>
                 </Link>
                 <button onClick={() => deletePlaylist(playlist._id)}>🗑️</button>
               </div>

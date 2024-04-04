@@ -40,15 +40,15 @@ const Player = () => {
     }
   }, [location.state]);
 
-  // useEffect(() => {
-  //   if (
-  //     tracks.length > 0 &&
-  //     currentIndex >= 0 &&
-  //     currentIndex < tracks.length
-  //   ) {
-  //     setCurrentTrack(tracks[currentIndex].track);
-  //   }
-  // }, [currentIndex, tracks]);
+  useEffect(() => {
+    if (
+      tracks.length > 0 &&
+      currentIndex >= 0 &&
+      currentIndex < tracks.length
+    ) {
+      setCurrentTrack(tracks[currentIndex].track);
+    }
+  }, [currentIndex, tracks]);
 
 
   return (

@@ -26,18 +26,17 @@ const Favorites = () => {
     <div className="screen-container">
       <div className="favorites-body">
         {tracks.map((item, index) => (
-          <div className="song-card" 
+          <div className="favsong-card" 
           key={item.track.id} 
           onClick={() => handleSongClick(index)}>
           <img
             src={item.track.album.images[0].url}
             alt="Album-Art"
-            className="song-image"
+            className="favsong-image"
           />
-          <p className="song-title">{item.track.name}</p>
-          <p className="song-subtitle">{item.track.name} </p>
-          <p className="song-subtitle">by {item.track.artists.map(artist => artist.name).join(", ")}</p>
-          <div className="song-fade">
+          <p className="favsong-title">{item.track.name}</p>
+          <p className="favsong-subtitle">by {item.track.artists.map(artist => artist.name).join(", ")}</p>
+          <div className="favsong-fade">
               <IconContext.Provider value={{ size: "50px", color: "#E99D72" }}>
                 <AiFillPlayCircle />
               </IconContext.Provider>

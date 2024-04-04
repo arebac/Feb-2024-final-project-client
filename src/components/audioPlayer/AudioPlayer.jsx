@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./audioPlayer.css";
+import "../audioPlayer/audioPlayer.css"
 import ProgressCircle from "./ProgressCircle";
 import Controls from "./Controls";
 import WaveAnimation from "./WaveAnimation";

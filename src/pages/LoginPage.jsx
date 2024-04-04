@@ -47,34 +47,96 @@ function LoginPage() {
 
   return (
     <div className="screen-container">
-    <div className="LoginPage">
-      <h1>Login</h1>
-
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={thisUser.email}
-          onChange={handleTextChange}
-        />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={thisUser.password}
-          onChange={handleTextChange}
-        />
-
-        <button type="submit">Login</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+    <section>
+      {" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+    <div className="signin">
+      <div className="content">
+        <h2>Sign In</h2>
+        <form className="form" onSubmit={handleLoginSubmit}>
+          <div className="inputBox">
+            <input
+              type="email"
+              name="email"
+              value={thisUser.email}
+              onChange={handleTextChange}
+              required
+            />
+            <i>Username</i>
+          </div>
+          <div className="inputBox">
+            <input
+              type="password"
+              name="password"
+              value={thisUser.password}
+              onChange={handleTextChange}
+              required
+            />
+            <i>Password</i>
+          </div>
+          <div className="links">
+            <Link to="/signup"><p>Signup</p></Link>
+          </div>
+          <div className="inputBox">
+            <input type="submit" value="Login" />
+          </div>
+        </form>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+      </div>
     </div>
-    </div>
+    </section>
+  </div>
   );
 }
 

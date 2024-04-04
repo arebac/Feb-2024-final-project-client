@@ -7,6 +7,8 @@ import { FaPlus } from "react-icons/fa";
 import { PlaylistContext } from "../context/playlists.context";
 import Select from "react-select";
 import { put } from "../services/authService";
+import "../screens/library/library.css";
+import "../shared/searchBar.css";
 
 function SearchTrack() {
   const [query, setQuery] = useState(""); // Initialize state with an empty string for controlled input
@@ -22,17 +24,15 @@ function SearchTrack() {
     console.log(currentPlaylist);
 
     try {
-      const response = await put("/playlist/" + currentPlaylist._id, {track: {name: currentSong.name,
-            artist: currentSong.artists[0].name,
-            duration_ms: currentSong.duration_ms,
-            id: currentSong.id,
-            image: currentSong.album.images[0].url}
-        
-          
-            
-          },
-        
-      );
+      const response = await put("/playlist/" + currentPlaylist._id, {
+        track: {
+          name: currentSong.name,
+          artist: currentSong.artists[0].name,
+          duration_ms: currentSong.duration_ms,
+          id: currentSong.id,
+          image: currentSong.album.images[0].url,
+        },
+      });
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -60,113 +60,112 @@ function SearchTrack() {
 
   return (
     <div className="screen-container ">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full d-flex align-items-center justify-content"
-      >
-        <div className="" />
-        <input
-          type="text"
-          name="searchInput"
-          placeholder="Search for songs"
-          value={query} // Controlled input must have its value tied to component state
-          onChange={(e) => setQuery(e.target.value)} // Update state based on input
-          className="" // Ensure input grows within form, added ml-4 for spacing
-        />
-        <button type="submit" className="ml-4">
-          Search!
-        </button>{" "}
-        {/* Added spacing */}
-      </form>
-
       <div className="favorites-body">
-        {results &&
-          results.map((track) => (
-            <div
-              className="song-card"
-              key={track.id}
-              data-bs-target="#exampleModal"
-              data-bs-toggle="modal"
-              onClick={() => setCurrentSong(track)}
-            >
-              <img
-                src={track.album.images[0].url}
-                alt="Album-Art"
-                className="song-image"
-              />
-              <p className="">{track.name}</p>
-              <p className="song-subtitle">
-                by {track.artists.map((artist) => artist.name).join(", ")}
-              </p>
-              <div className="song-fade">
-                <IconContext.Provider
-                  value={{ size: "50px", color: "#E99D72" }}
-                >
-                  <FaPlus />
-                </IconContext.Provider>
-              </div>
-            </div>
-          ))}
+        <form action="" className="search-bar" onSubmit={handleSubmit}>
+          <input
+            type="search"
+            name="search"
+            pattern=".*\S.*"
+            required
+            placeholder="Search for songs"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className=""
+          />
+          <button type="submit" className="search-btn ml-4">
+            <span>Search</span>
+          </button>
+        </form>
 
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <form onSubmit={(e) => handleAddToPlaylist(e)}>
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="exampleModalLabel">
-                    Add {currentSong && currentSong.name} to a playlist
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
+        <div className="favorites-body">
+          {results &&
+            results.map((track) => (
+              <div
+                className="searchsong-card"
+                key={track.id}
+                data-bs-target="#exampleModal"
+                data-bs-toggle="modal"
+                onClick={() => setCurrentSong(track)}
+              >
+                <img
+                  src={track.album.images[0].url}
+                  alt="Album-Art"
+                  className="favsong-image"
+                />
+                <p className="favsong-title">{track.name}</p>
+                <p className="favsong-subtitle">
+                  by {track.artists.map((artist) => artist.name).join(", ")}
+                </p>
+                <div className="favsong-fade">
+                  <IconContext.Provider
+                    value={{ size: "50px", color: "#E99D72" }}
+                  >
+                    <FaPlus />
+                  </IconContext.Provider>
                 </div>
-                <div className="modal-body">
-                  <label htmlFor="playlistName">Select playlist</label>
-                  {playlists && (
-                    <Select
-                      onChange={(e) => setCurrentPlaylist(e.value)}
-                      options={playlists.map((playlist) => ({
-                        value: playlist,
-                        label: playlist.name,
-                      }))}
-                    />
-                  )}
+              </div>
+            ))}
 
-                  {/* <input
+          <div
+            className="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <form onSubmit={(e) => handleAddToPlaylist(e)}>
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="exampleModalLabel">
+                      Add {currentSong && currentSong.name} to a playlist
+                    </h1>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <label htmlFor="playlistName">Select playlist</label>
+                    {playlists && (
+                      <Select
+                        onChange={(e) => setCurrentPlaylist(e.value)}
+                        options={playlists.map((playlist) => ({
+                          value: playlist,
+                          label: playlist.name,
+                        }))}
+                      />
+                    )}
+
+                    {/* <input
                     name="playlistName"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   /> */}
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      data-bs-dismiss="modal"
+                    >
+                      Add!
+                    </button>
+                  </div>
                 </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    data-bs-dismiss="modal"
-                  >
-                    Add!
-                  </button>
-                </div>
-              </div>
-            </div>{" "}
-          </form>
+              </div>{" "}
+            </form>
+          </div>
         </div>
       </div>
     </div>

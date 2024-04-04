@@ -7,21 +7,6 @@
 
 
 
-.playlist-card {
-    position: relative;
-    width: 15%;
-    height: 38%;
-    border-radius: 20px;
-    background-color: rgb(30, 42, 62);
-    border: 1px solid rgba(54, 69, 98, 0.18);
-    padding: 1%;
-    margin-bottom: 2%;
-    background: rgb(64, 93, 33);
-    background: linear-gradient(75deg, rgba(64, 93, 33, 1) 0%, rgba(118, 149, 69, 1) 100%);
-    transition: all 0.2s ease;
-    cursor: pointer;
-
-}
 
 
 

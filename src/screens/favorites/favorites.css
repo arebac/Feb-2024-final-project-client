@@ -8,10 +8,10 @@
     justify-content: space-between;
 }
 
-.song-card {
+.favsong-card {
     position: relative;
     width: 15%;
-    height: 44%;
+    height: 50%;
     border-radius: 20px;
     background-color: rgb(30, 42, 62);
     border: 1px solid rgba(54, 69, 98, 0.18);
@@ -24,22 +24,38 @@
 
 }
 
-.song-card:hover {
+.searchsong-card {
+    position: relative;
+    width: 15%;
+    height: 60%;
+    border-radius: 20px;
+    background-color: rgb(30, 42, 62);
+    border: 1px solid rgba(54, 69, 98, 0.18);
+    padding: 1%;
+    margin-bottom: 2%;
+    background: rgb(64, 93, 33);
+    background: linear-gradient(75deg, rgba(64, 93, 33, 1) 0%, rgba(118, 149, 69, 1) 100%);
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+}
+
+.favsong-card:hover {
     transform: scale(1.02);
 }
 
-.song-card:hover .playlist-fade {
+.favsong-card:hover .playlist-fade {
     opacity: 1;
 }
 
-.song-image {
+.favsong-image {
     width: 100%;
     aspect-ratio: 1;
     border-radius: 15px;
 
 }
 
-.song-title {
+.favsong-title {
 
     font-weight: 800;
     font-size: 16px;
@@ -54,14 +70,14 @@
 
 }
 
-.song-subtitle {
+.favsong-subtitle {
     font-weight: 400;
     font-size: 16px;
     margin: 0px;
     color: #c4d0e37c
 }
 
-.song-fade {
+.favsong-fade {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -76,4 +92,12 @@
     justify-content: flex-end;
     padding: 8%;
     transition: 0.5s ease;
+}
+
+.favorites-body::-webkit-scrollbar {
+    display: none;
+}
+
+.favorites-body::-webkit-scrollbar {
+    display: none;
 }

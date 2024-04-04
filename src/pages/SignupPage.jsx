@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { post } from "../services/authService";
 import { Link, useNavigate } from "react-router-dom";
-
+import "../shared/signuppage.css";
 
 function SignupPage() {
   //   const [email, setEmail] = useState("");
@@ -54,43 +54,107 @@ function SignupPage() {
 
   return (
     <div className="screen-container">
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <section>
+    {" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>{" "}
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      {/* Decorative spans can be added here if needed */}
+      <div className="signin">
+        <div className="content">
+          <h2>Sign Up</h2>
+          <form className="form" onSubmit={handleSignupSubmit}>
+            <div className="inputBox">
+              <input
+                type="email"
+                name="email"
+                value={newUser.email}
+                onChange={handleTextChange}
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div className="inputBox">
+              <input
+                type="password"
+                name="password"
+                value={newUser.password}
+                onChange={handleTextChange}
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div className="inputBox">
+              <input
+                type="text"
+                name="name"
+                value={newUser.name}
+                onChange={handleTextChange}
+                placeholder="Name"
+                required
+              />
+            </div>
+            <div className="inputBox">
+            <input type="submit" value="Sign Up"/>
+            </div>
+          </form>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          <p>Already have an account?</p>
+          <Link to="/login">Login</Link>
+        </div>
+      </div>
+    </section>
+  </div>
 
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={newUser.email}
-          onChange={handleTextChange}
-        />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={newUser.password}
-          onChange={handleTextChange}
-        />
-
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={newUser.name}
-          onChange={handleTextChange}
-        />
-
-        <button type="submit">Sign Up</button>
-      </form>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
-    </div>
-    </div>
   );
 }
 

@@ -4,19 +4,19 @@ import { IconContext } from "react-icons";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import SpotifyWebApi from "spotify-web-api-js";
+import Login from "../../auth/Login";
 
 const spotifyApi = new SpotifyWebApi();
 
 
 const Library = () => {
-
   const [playlists, setPlaylists] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     spotifyApi.getUserPlaylists().then(
       function (data) {
-        console.log('Retrieved playlists', data.items);
+        console.log("Retrieved playlists", data.items);
         setPlaylists(data.items);
       },
       function (err) {
@@ -30,7 +30,7 @@ const Library = () => {
     navigate("/player", { state: { id: id } });
   };
 
-  return ( 
+  return (
     <div className="screen-container">
       <div className="library-body">
         {playlists?.map((playlist) => (
@@ -45,7 +45,7 @@ const Library = () => {
               className="playlist-image"
             />
             <p className="playlist-title">{playlist.name}</p>
-            <p className="playlist-subtitle">{playlist.tracks.total} Songs</p>
+            <p className="playlist-subtitle">{playlist.tracks.length} Songs</p>
             <div className="playlist-fade">
               <IconContext.Provider value={{ size: "50px", color: "#E99D72" }}>
                 <AiFillPlayCircle />
@@ -56,9 +56,6 @@ const Library = () => {
       </div>
     </div>
   );
-
-
-
 };
 
 export default Library;
