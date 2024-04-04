@@ -5,12 +5,19 @@ import Feed from "./Feed";
 import Trending from "./Trending";
 import Library from "./library/Library";
 import Player from "./player/Player";
-import Favorites from "./Favorites";
+
 import Sidebar from "../components/sidebar/Sidebar";
 import Login from "../auth/Login";
 import { useState, useEffect } from "react";
 // import { setClientToken } from "../spotify";
 import SpotifyWebApi from "spotify-web-api-js";
+import Favorites from "./favorites/Favorites";
+import SearchTrack from "../pages/SearchTrack";
+import Playlists from "../pages/Playlists";
+import SignupPage from "../pages/SignupPage";
+import PlaylistDetails from "../pages/PlaylistDetails";
+import AllPlaylists from "../pages/AllPlaylists";
+import LoginPage from "../pages/LoginPage";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -30,57 +37,20 @@ const Home = () => {
   const [nowPlaying, setNowPlaying] = useState({ name: "", albumArt: "" });
 
   useEffect(() => {
-    // This logs the entire object obtained from the URL. Adjusted to log only the token.
     const { access_token: spotifyToken } = getTokenFromUrl();
     console.log("Token obtained from URL:", spotifyToken);
-    window.location.hash = ""; // Clear the URL fragment for security
+    window.location.hash = ""; 
 
     if (spotifyToken) {
       setLoggedIn(true);
-      spotifyApi.setAccessToken(spotifyToken); // Set the token for Spotify API client
+      spotifyApi.setAccessToken(spotifyToken); 
 
-      // Fetch and log the user's Spotify username as a test
       spotifyApi.getMe().then((user) => {
         console.log("Spotify username:", user.display_name);
       });
     }
   }, []);
 
-
-
-  // const [token, setToken] = useState("");
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   const hash = window.location.hash;
-  //   window.location.hash = "";
-
-  //   if (!token && hash) {
-  //     const _token = hash.split("&")[0].split("=")[1];
-  //     window.localStorage.setItem("token", _token);
-  //     setToken(_token);
-  //     setClientToken(_token);
-  //   } else {
-  //     setToken(token);
-  //     setClientToken(token);
-  //   }
-  // }, []);
-
-  //   return !token ? (
-  //     <Login />
-  //   ) : (
-  //     <div className="main-body">
-  //       <Sidebar />
-  //       <Routes>
-  //         <Route path="/" element={<Library />} />
-  //         <Route path="/feed" element={<Feed />} />
-  //         <Route path="/trending" element={<Trending />} />
-  //         <Route path="/player" element={<Player />} />
-  //         <Route path="/favorites" element={<Favorites />} />
-  //       </Routes>
-  //     </div>
-  //   );
-  // };
 
   return (
     <>
@@ -91,10 +61,16 @@ const Home = () => {
           <Sidebar />
           <Routes>
             <Route path="/" element={<Library />} />
-            <Route path="/feed" element={<Feed />} />
-            <Route path="/trending" element={<Trending />} />
+            {/* <Route path="/feed" element={<Feed />} />
+            <Route path="/trending" element={<Trending />} /> */}
             <Route path="/player" element={<Player />} />
+            <Route path="/search-track" element={<SearchTrack />} />
+            <Route path="/user-playlists" element={<Playlists />} />
+            <Route path="/signup" element={<SignupPage />} />
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="/playlists/:playlistId"element={<PlaylistDetails />} />
+            <Route path="/playlists" element={<AllPlaylists />} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </div>
       )}

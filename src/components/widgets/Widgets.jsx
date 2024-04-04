@@ -9,7 +9,8 @@ const Widgets = ({ artistID }) => {
   const [similar, setSimilar] = useState([]);
   const [featured, setFeatured] = useState([]);
   const [newRelease, setNewReleases] = useState([]);
-  const id =artistID
+
+  const id = artistID;
 
   console.log(similar, featured, newRelease);
 
@@ -41,11 +42,21 @@ const Widgets = ({ artistID }) => {
     }
   }, [id]);
 
+
   return (
     <div className="widgets-body flex">
-      <WidgetCard title="Similar Artists" similar={similar} />
-      <WidgetCard title="Made For You" featured={featured} />
-      <WidgetCard title="New Releases" newRelease={newRelease} />
+      <WidgetCard
+        title="Similar Artists"
+        similar={similar}
+      />
+      <WidgetCard
+        title="Made For You"
+        featured={featured}
+      />
+      <WidgetCard
+        title="New Releases"
+        newRelease={newRelease}
+      />
     </div>
   );
 };

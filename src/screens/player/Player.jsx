@@ -14,42 +14,42 @@ const Player = () => {
   const [currentTrack, setCurrentTrack] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
 
+
+
   useEffect(() => {
-    const playlistId = location.state?.id;
-    if (playlistId) {
+
+    if (location.state?.tracks) {
+      setTracks(location.state.tracks); 
+      setCurrentIndex(location.state.index); 
+      setCurrentTrack(location.state.tracks[location.state.index]); 
+    } else if (location.state?.id) {
+      // Playlist navigation
+      const playlistId = location.state.id;
       spotifyApi.getPlaylistTracks(playlistId).then(
         (data) => {
           const items = data.items;
           setTracks(items);
           if (items.length > 0) {
-            setCurrentTrack(items[0].track);
+            setCurrentTrack(items[0].track); 
           }
         },
         (err) => {
-          console.error(
-            "Something went wrong when fetching the playlist tracks",
-            err
-          );
+          console.error("Something went wrong when fetching the playlist tracks", err);
         }
       );
     }
-  }, [location.state?.id]);
+  }, [location.state]);
 
-  useEffect(() => {
-    if (
-      tracks.length > 0 &&
-      currentIndex >= 0 &&
-      currentIndex < tracks.length
-    ) {
-      setCurrentTrack(tracks[currentIndex].track);
-    }
-  }, [currentIndex, tracks]);
+  // useEffect(() => {
+  //   if (
+  //     tracks.length > 0 &&
+  //     currentIndex >= 0 &&
+  //     currentIndex < tracks.length
+  //   ) {
+  //     setCurrentTrack(tracks[currentIndex].track);
+  //   }
+  // }, [currentIndex, tracks]);
 
-  // const playTrack = (trackUri) => {
-  //   spotifyApi.play({ uris: [trackUri] });
-  // };
-
-  // console.log(playTrack)
 
   return (
     <div className="screen-container flex">

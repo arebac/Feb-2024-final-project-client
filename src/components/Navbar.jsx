@@ -25,6 +25,15 @@ function Navbar() {
         <>
           <button onClick={logOutUser}>Logout</button>
           {/* <span>{user && user.name}</span> */}
+          <Link to="/search-track">
+            <button >Search songs</button>
+          </Link>
+          <Link to="/user-playlists">
+            <button>Your playlists</button>
+          </Link>
+          <Link to="/playlists">
+            <button>All playlists</button>
+          </Link>
         </>
       ) : (
         <>

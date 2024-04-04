@@ -53,6 +53,7 @@ function SignupPage() {
   };
 
   return (
+    <div className="screen-container">
     <div className="SignupPage">
       <h1>Sign Up</h1>
 
@@ -88,6 +89,7 @@ function SignupPage() {
 
       <p>Already have account?</p>
       <Link to={"/login"}> Login</Link>
+    </div>
     </div>
   );
 }
