@@ -9,7 +9,7 @@ const Login = () => {
         alt="logo-spotify"
         className="logo"
       />
-      <a href={"http://localhost:4001"}>
+      <a href={"https://spotify-api.adaptable.app"}>
         <div className="login-btn">LOG IN</div>
       </a>
     </div>
