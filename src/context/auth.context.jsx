@@ -6,11 +6,14 @@ import { useNavigate } from "react-router-dom";
 
 import { get } from "../services/authService";
 
+// import { useCookies } from 'react-cookie';
+
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  // const [cookies, setCookie, removeCookie] = useCookies(['sp_dc', 'sp_key']);
   const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
@@ -29,6 +32,7 @@ function AuthProvider({ children }) {
     // <== ADD
     // Upon logout, remove the token from the localStorage
     localStorage.removeItem("authToken");
+    localStorage.clear()
   };
 
   const authenticateUser = () => {
@@ -71,9 +75,22 @@ function AuthProvider({ children }) {
     // and update the state variables
     authenticateUser();
     navigate("/");
+
+
+    // browser.cookies.remove(sp_dc)
+    // browser.cookies.remove(sp_key)
+    // removeCookie('sp_dc')
+    // removeCookie('sp_key')
+    // document.cookie.split(";").forEach((c) => {
+    //   document.cookie = c
+    //     .replace(/^ +/, "")
+    //     .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    // });
   };
 
   useEffect(() => {
+    // console.log("these are the cookies", cookies)
+    // console.log("Coookies", document.cookie.split(";"))
     authenticateUser(); //  <==  ADD
   }, []);
 

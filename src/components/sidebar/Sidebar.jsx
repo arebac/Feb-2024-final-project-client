@@ -30,7 +30,6 @@ const getTokenFromUrl = () => {
     }, {});
 };
 
-
 const Sidebar = () => {
   const [image, setImage] = useState(
     "https://i.pinimg.com/474x/db/c7/63/dbc7636bb173ffb38acb503d8ee44995.jpg"
@@ -42,21 +41,26 @@ const Sidebar = () => {
   useEffect(() => {
     const { access_token: spotifyToken } = getTokenFromUrl();
     console.log("Token obtained from URL:", spotifyToken);
-    window.location.hash = ""; 
+    window.location.hash = "";
 
     if (spotifyToken) {
       setLoggedIn(true);
-      spotifyApi.setAccessToken(spotifyToken); 
+      spotifyApi.setAccessToken(spotifyToken);
+      localStorage.setItem("access-token", spotifyToken);
 
       spotifyApi.getMe().then((user) => {
         console.log("Spotify username:", user.display_name);
       });
     }
   }, []);
+
   useEffect(() => {
     const token = localStorage.getItem("authToken"); // Directly retrieve the token
     if (token) {
-      spotifyApi.setAccessToken(token);
+      console.log("Checking token after login", token);
+      let spotifyToken = localStorage.getItem("access-token");
+      console.log("this is the spotify token===>", spotifyToken);
+      spotifyApi.setAccessToken(spotifyToken);
       spotifyApi
         .getMe()
         .then((response) => {
@@ -69,9 +73,12 @@ const Sidebar = () => {
           console.error("Failed to fetch user profile", err);
           // Handle error, e.g., token expired, network error, etc.
         });
+    } else {
+      spotifyApi.setAccessToken(null);
+      setLoggedIn(false);
     }
-  }, []);
-  
+  }, [user]);
+
   const getToken = () => {
     return localStorage.getItem("authToken");
   };
@@ -91,7 +98,7 @@ const Sidebar = () => {
         <SidebarButton title="Home" to="/" icon={<FaHome />} />
         {!user && (
           <>
-            <SidebarButton title="signup" to="/signup" icon={<FaUserPlus />} />
+            {/* <SidebarButton title="signup" to="/signup" icon={<FaUserPlus />} /> */}
             <SidebarButton title="login" to="/login" icon={<FaSignInAlt />} />
           </>
         )}
@@ -110,29 +117,34 @@ const Sidebar = () => {
           to="/playlists"
           icon={<MdSpaceDashboard />}
         />
-         {!loggedIn ?
-        (<SidebarButton title="SpotifyLogin" to="/spotifylogin" icon={<FaPlay />} />) :
-       (
-        <>
-        <SidebarButton title="Player" to="/player" icon={<FaPlay />} />
-        <SidebarButton
-          title="Favorites"
-          to="/favorites"
-          icon={<MdFavorite />}/>
-        
-        <SidebarButton title="Library" to="/library" icon={<IoLibrary />} />
-        </>
-      )
-      }
-      {user && (
-        <SidebarButton
-          title="Sign Out"
-          to=""
-          icon={<FaSignOutAlt />}
-          logout={logOutUser}
-        />
-      )}
-    </div>   </div>
+        {!loggedIn ? (
+          <SidebarButton
+            title="SpotifyLogin"
+            to="/spotifylogin"
+            icon={<FaPlay />}
+          />
+        ) : (
+          <>
+            <SidebarButton title="Player" to="/player" icon={<FaPlay />} />
+            <SidebarButton
+              title="Favorites"
+              to="/favorites"
+              icon={<MdFavorite />}
+            />
+
+            <SidebarButton title="Library" to="/library" icon={<IoLibrary />} />
+          </>
+        )}
+        {user && (
+          <SidebarButton
+            title="Sign Out"
+            to=""
+            icon={<FaSignOutAlt />}
+            logout={logOutUser}
+          />
+        )}
+      </div>{" "}
+    </div>
   );
 };
 
